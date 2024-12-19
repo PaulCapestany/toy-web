@@ -30,18 +30,24 @@ toy-web/
 └── script.js     // Fetch logic to interact with toy-service endpoints
 ```
 
-*(This may evolve as we add features.)*
+## Usage
 
-## Running Locally
+1. **Ensure `[toy-service](https://github.com/paulcapestany/toy-service)` is running (if you want to test integration):**  
+   In the `toy-service` project directory, run:
+   ```bash
+   make run
+   ```
+   This will start `toy-service` at `http://localhost:8080`. Confirm that it's up by visiting http://localhost:8080/healthz in your browser. You should see a JSON response `{"status":"ok"}`.
 
-Since this is a static web project, just open `index.html` in your browser.  
-Or start a simple HTTP server:
+2. **Serve `toy-web` files locally:**  
+   Navigate to the `toy-web` directory. The simplest approach is to use Python's built-in HTTP server:
+   ```bash
+   python3 -m http.server 8081
+   ```
+   This starts a static server, serving `toy-web` files at http://localhost:8081.
 
-```bash
-python3 -m http.server 8081
-```
-
-Then open http://localhost:8081 in your browser.
+3. **Open the frontend in your browser:**  
+   Go to http://localhost:8081 in your browser. You should see the main `toy-web` page. From there, you can interact with the `/echo` endpoint (and other endpoints like `/info` or `/healthz`) through the frontend interface.
 
 ### Integrating with `toy-service`
 
@@ -53,19 +59,16 @@ If `toy-service` is running:
 
 You can update the URLs in `script.js` if your `toy-service` runs elsewhere.
 
-## Contributing & Future Plans
-
-Check `TODO.md` for planned improvements like:
-- Enhancing the UI/UX with more styling.
-- Adding validation to the `/echo` form.
-- Possibly integrating simple testing tools in the future.
-
-For now, the goal is to keep it simple and showcase how frontend and backend interact in the bitiq ecosystem.
-
 ## Related Projects
 
 - **[toy-service](https://github.com/paulcapestany/toy-service)**: The microservice providing stable APIs to `toy-web`. Ideal starting point for backend-engineering-focused contributors. 
 - **[gitops](https://github.com/paulcapestany/gitops)**: Manages CI/CD (i.e. building and deployment) of the bitiq microservices using GitOps principles. Ideal for SREs and infrastructure-focused contributors.
+
+## Contributing
+
+See `TODO.md` for upcoming tasks and `CHANGELOG.md` for past changes. Additional contributor details will be provided in `CONTRIBUTING.md` (as per planned TODOs).
+
+Fork, clone, and start experimenting. We welcome new contributors!
 
 ## License
 

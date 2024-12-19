@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>toy-web | Echo Tester</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>toy-web: Echo Test</h1>
+  <p>Use the form below to send a message to the toy-service <code>/echo</code> endpoint.</p>
+
+  <form id="echo-form">
+    <label for="messageInput">Message:</label>
+    <input type="text" id="messageInput" name="message" placeholder="Enter your message" required />
+    <button type="submit">Send</button>
+  </form>
+
+  <div id="result" class="hidden">
+    <h2>Echo Result</h2>
+    <p id="resultMessage"></p>
+    <p><strong>Version:</strong> <span id="resultVersion"></span></p>
+    <p><strong>Commit:</strong> <span id="resultCommit"></span></p>
+    <p><strong>Environment:</strong> <span id="resultEnv"></span></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

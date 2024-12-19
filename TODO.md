@@ -4,22 +4,12 @@ This document outlines planned enhancements and maintenance tasks for `toy-web`.
 
 ## Guidelines
 
-- **[Semantic Versioning (SemVer)](https://semver.org/):**  
-  Use MAJOR.MINOR.PATCH:
-  - **MAJOR:** Incompatible API changes (breaking changes).
-  - **MINOR:** Backwards-compatible functionality additions.
-  - **PATCH:** Backwards-compatible bug fixes, documentation improvements, chores, etc.
+- **Semantic Versioning (SemVer)** and **Conventional Commits** rules as described in the global [CONTRIBUTING.md](./CONTRIBUTING.md).
   
-- **[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/):**  
-  Use conventional commit prefixes such as `feat`, `fix`, `docs`, `chore`, `refactor`, `perf`, `test`.  
-  For breaking changes, append `!` to the commit type, e.g., `feat!: ...`.
-
 - **Upon Completion:**  
   When a task is completed:
   - Remove it from `TODO.md`.
-  - Update `CHANGELOG.md` with the corresponding SemVer version increment and the commit message.
-
-This ensures `TODO.md` always represents future or in-progress work, and `CHANGELOG.md` tracks what has shipped.
+  - Update `CHANGELOG.md` with the version increment and commit message.
 
 ---
 

@@ -1,0 +1,17 @@
+{
+    "name": "toy-web",
+    "version": "0.1.0",
+    "description": "Minimalistic frontend reference for toy-service integration",
+    "main": "index.html",
+    "scripts": {
+      "test": "jest"
+    },
+    "devDependencies": {
+      "jest": "^29.5.0",
+      "node-fetch": "^3.3.1"
+    },
+    "jest": {
+      "testEnvironment": "jsdom"
+    }
+  }
+  
