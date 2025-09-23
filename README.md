@@ -61,6 +61,8 @@ npm test
 
 For a quick coverage snapshot during local work, run `npm test -- --coverage`.
 
+Coverage output lands in `coverage/`; delete it when you no longer need the report.
+
 ### Integrating with `toy-service`
 
 `toy-web` expects `toy-service` at `http://localhost:8080` by default.  
