@@ -57,6 +57,8 @@ Each subproject includes instructions on running tests (e.g., `make test` or sim
 
 For frontends (like `toy-web`), tests may be minimal at first, but we welcome contributions to introduce lightweight frameworks like Cypress or Jest.
 
+- **Run local checks before opening a PR:** follow the project README to execute `npm test` (or the relevant command) to keep CI green.
+
 ## Documentation
 
 - **OpenAPI Specs:** Serve as the primary source of API documentation.
