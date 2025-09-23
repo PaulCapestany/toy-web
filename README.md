@@ -32,6 +32,8 @@ toy-web/
 
 ## Usage
 
+Install dependencies once with `npm install` to ensure tooling like Jest is available.
+
 1. **Ensure `[toy-service](https://github.com/paulcapestany/toy-service)` is running (if you want to test integration):**  
    In the `toy-service` project directory, run:
    ```bash
