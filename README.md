@@ -49,6 +49,14 @@ toy-web/
 3. **Open the frontend in your browser:**  
    Go to http://localhost:8081 in your browser. You should see the main `toy-web` page. From there, you can interact with the `/echo` endpoint (and other endpoints like `/info` or `/healthz`) through the frontend interface.
 
+### Run Tests Locally
+
+Run the Jest suite to confirm your changes before pushing:
+
+```bash
+npm test
+```
+
 ### Integrating with `toy-service`
 
 `toy-web` expects `toy-service` at `http://localhost:8080` by default.  
