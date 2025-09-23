@@ -57,6 +57,8 @@ Run the Jest suite to confirm your changes before pushing:
 npm test
 ```
 
+For a quick coverage snapshot during local work, run `npm test -- --coverage`.
+
 ### Integrating with `toy-service`
 
 `toy-web` expects `toy-service` at `http://localhost:8080` by default.  
