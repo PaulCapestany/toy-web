@@ -28,9 +28,6 @@ This document outlines planned enhancements and maintenance tasks for `toy-web`.
 
 ### PATCH Improvements (Docs, Chores)
 
-- **docs: add a README explaining how to run locally**  
-  Provide clear instructions for starting a local dev server (e.g., `python -m http.server`).
-
 - **chore: add simple JS code documentation**  
   Add inline comments explaining how the fetch calls work, how responses are processed, etc.
 
