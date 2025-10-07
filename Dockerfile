@@ -10,8 +10,9 @@
 
 FROM node:18-alpine AS builder
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci --loglevel verbose
+# Copy npm manifests; package-lock.json is optional in this repo
+COPY package*.json ./
+RUN npm install --loglevel verbose
 COPY . .
 # Run tests and build steps if any
 RUN npm test
