@@ -25,6 +25,13 @@ console.log("script.js loaded");
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM fully loaded, attaching event listeners");
   const form = document.getElementById("echo-form");
+  if (!form) {
+    console.warn("echo-form not found in DOM, skipping listener registration");
+    return;
+  }
+  const submitButton =
+    form.querySelector("button[type='submit']") || form.querySelector("button");
+  const defaultButtonLabel = submitButton ? submitButton.textContent : "";
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     console.log("Form submitted by user");
@@ -40,6 +47,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
+      if (submitButton) {
+        console.log("Disabling submit button while request is in flight");
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
+      }
+      const resultContainer = document.getElementById("result");
+      if (resultContainer) {
+        console.log("Hiding previous result while fetching new data");
+        resultContainer.classList.add("hidden");
+      }
       console.log("Sending request to /echo endpoint");
       const result = await sendEchoRequest(message);
       console.log("Request successful, updating UI with result", result);
@@ -47,6 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (err) {
       console.error("Error in sendEchoRequest:", err);
       alert("Failed to get echo response. Check console for details.");
+    } finally {
+      if (submitButton) {
+        console.log("Re-enabling submit button");
+        submitButton.disabled = false;
+        submitButton.textContent = defaultButtonLabel;
+      }
     }
   });
 });

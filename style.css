@@ -37,6 +37,12 @@ body {
     background-color: #004799;
   }
   
+  button:disabled {
+    background-color: #7aa8d9;
+    cursor: wait;
+    opacity: 0.75;
+  }
+  
   code {
     display: inline-block;
     padding: 2px 4px;
