@@ -29,7 +29,22 @@ RUN rm /usr/share/nginx/html/*.orig 2>/dev/null || true
 # Expose port 8080 for consistency
 EXPOSE 8080
 
-# Adjust Nginx to listen on 8080
+# Adjust Nginx to listen on 8080 in the default server
 RUN sed -i 's/listen\s*80;/listen 8080;/' /etc/nginx/conf.d/default.conf
+
+# OpenShift/Arbitrary UID compatibility:
+# - Pre-create Nginx cache temp dirs
+# - Make critical paths group-writable and assign group 0 so arbitrary UIDs
+#   (which default to root group on OpenShift) can write
+# - Comment out the 'user' directive to avoid warnings when not running as root
+RUN set -eux; \
+    mkdir -p /var/cache/nginx/client_temp; \
+    for p in /var/cache/nginx /var/run /var/log/nginx /etc/nginx /etc/nginx/conf.d; do \
+      chgrp -R 0 "$p" || true; \
+      chmod -R g+rwX "$p" || true; \
+    done; \
+    if grep -q "^user" /etc/nginx/nginx.conf; then \
+      sed -i 's/^user.*/# user disabled for OpenShift/' /etc/nginx/nginx.conf; \
+    fi
 
 CMD ["nginx", "-g", "daemon off;"]
