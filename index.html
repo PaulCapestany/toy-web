@@ -7,23 +7,24 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>toy-web: Echo Test</h1>
-  <p>Use the form below to send a message to the toy-service <code>/echo</code> endpoint.</p>
+  <main>
+    <h1>toy-web: Echo Test</h1>
+    <p>Use the form below to send a message to the toy-service <code>/echo</code> endpoint.</p>
 
-  <form id="echo-form">
-    <label for="messageInput">Message:</label>
-    <input type="text" id="messageInput" name="message" placeholder="Enter your message" required />
-    <button type="submit">Send</button>
-  </form>
+    <form id="echo-form">
+      <label for="messageInput">Message:</label>
+      <input type="text" id="messageInput" name="message" placeholder="Enter your message" required />
+      <button type="submit">Send</button>
+    </form>
 
-  <div id="result" class="hidden" role="status" aria-live="polite">
-    <h2>Echo Result</h2>
-    <p id="resultMessage"></p>
-    <p><strong>Version:</strong> <span id="resultVersion"></span></p>
-    <p><strong>Commit:</strong> <span id="resultCommit"></span></p>
-    <p><strong>Environment:</strong> <span id="resultEnv"></span></p>
-  </div>
-
+    <div id="result" class="hidden" role="status" aria-live="polite">
+      <h2>Echo Result</h2>
+      <p id="resultMessage"></p>
+      <p><strong>Version:</strong> <span id="resultVersion"></span></p>
+      <p><strong>Commit:</strong> <span id="resultCommit"></span></p>
+      <p><strong>Environment:</strong> <span id="resultEnv"></span></p>
+    </div>
+  </main>
   <script src="script.js"></script>
 </body>
 </html>
