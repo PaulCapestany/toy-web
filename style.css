@@ -13,6 +13,13 @@ body {
   input[type="text"] {
     padding: 5px;
     margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  input[type="text"]:focus {
+    border-color: #005cc5;
+    outline: 2px solid rgba(0, 92, 197, 0.2);
   }
   
   button {
