@@ -23,8 +23,18 @@ body {
   }
   
   button {
-    padding: 5px 10px;
+    padding: 6px 16px;
     cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #005cc5;
+    color: #fff;
+    transition: background-color 0.2s ease;
+  }
+  
+  button:hover,
+  button:focus {
+    background-color: #004799;
   }
   
   #result.hidden {
