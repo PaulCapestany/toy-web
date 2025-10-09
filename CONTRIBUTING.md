@@ -72,6 +72,7 @@ As bitiq grows, we may produce global documentation resources accessible from a 
 - Open a PR against `main`.
 - Follow Conventional Commits for your commit messages.
 - Update `CHANGELOG.md` upon completion of a TODO item.
+- If your change requires a deployment adjustment (new env vars, resource tuning, image tag handling, etc.), include a link to the matching change in [bitiq-io/gitops](https://github.com/bitiq-io/gitops) so reviewers can validate GitOps manifests. Reference that link when opening issues too.
 
 ## Release Process
 
