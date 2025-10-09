@@ -30,6 +30,12 @@ toy-web/
 └── script.js     // Fetch logic to interact with toy-service endpoints
 ```
 
+## Deployment via GitOps
+
+`toy-web` ships application assets only. Kubernetes manifests, Helm charts, and environment-specific configuration are managed in [bitiq-io/gitops](https://github.com/bitiq-io/gitops) under `charts/toy-web/`. Open pull requests there to change how the frontend is deployed or which image tag Argo CD/Image Updater should roll out.
+
+When filing issues or pull requests here that rely on deployment changes, include a link to the relevant GitOps chart or values file so reviewers can follow the release path. Keeping manifests centralized in the GitOps repo prevents drift—please don't commit cluster YAML to this project.
+
 ## Usage
 
 Install dependencies once with `npm install` to ensure tooling like Jest is available.
@@ -78,7 +84,7 @@ You can update the URLs in `script.js` if your `toy-service` runs elsewhere.
 ## Related Projects
 
 - **[toy-service](https://github.com/paulcapestany/toy-service)**: The microservice providing stable APIs to `toy-web`. Ideal starting point for backend-engineering-focused contributors. 
-- **[gitops](https://github.com/paulcapestany/gitops)**: Manages CI/CD (i.e. building and deployment) of the bitiq microservices using GitOps principles. Ideal for SREs and infrastructure-focused contributors.
+- **[bitiq-io/gitops](https://github.com/bitiq-io/gitops)**: Houses the Helm charts, ApplicationSets, and automation that deploy `toy-web` and `toy-service`. Start there when you need to change runtime manifests or Image Updater behaviour.
 
 ## Contributing
 
