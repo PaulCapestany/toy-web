@@ -137,6 +137,16 @@ function displayResult(result) {
   const resultCommit = document.getElementById("resultCommit");
   const resultEnv = document.getElementById("resultEnv");
 
+  if (!resultDiv) {
+    console.warn("Result container missing; cannot render response");
+    return;
+  }
+
+  if (!resultMessage || !resultVersion || !resultCommit || !resultEnv) {
+    console.warn("One or more result fields are missing; skipping update");
+    return;
+  }
+
   resultMessage.textContent = result.message || "";
   resultVersion.textContent = result.version || "";
   resultCommit.textContent = result.commit || "";
