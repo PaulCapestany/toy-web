@@ -5,6 +5,10 @@ body {
     margin: 20px auto;
     padding: 0 16px;
   }
+
+  .hidden {
+    display: none;
+  }
   
   label {
     margin-right: 10px;
@@ -49,6 +53,11 @@ body {
     border-radius: 4px;
     background-color: #f6f8fa;
     font-size: 0.95em;
+  }
+
+  .error-message {
+    margin-top: 12px;
+    color: #b3261e;
   }
   
   #result.hidden {

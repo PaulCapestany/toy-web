@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.20 - 2025-10-09
+
+### fix: show inline error feedback for echo requests  
+Display validation and network errors near the form instead of interrupting with modal alerts.
+
 ## v0.1.9 - 2025-10-02
 
 ### docs: remove completed README task  

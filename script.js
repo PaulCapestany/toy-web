@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const submitButton =
     form.querySelector("button[type='submit']") || form.querySelector("button");
   const defaultButtonLabel = submitButton ? submitButton.textContent : "";
+  const errorMessage = document.getElementById("errorMessage");
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     console.log("Form submitted by user");
@@ -40,9 +41,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const message = messageInput.value.trim();
     console.log("User input message:", message);
 
+    if (errorMessage) {
+      errorMessage.textContent = "";
+      errorMessage.classList.add("hidden");
+    }
+
     if (!message) {
       console.warn("Empty message, not sending request");
-      alert("Please enter a non-empty message.");
+      if (errorMessage) {
+        errorMessage.textContent = "Please enter a non-empty message.";
+        errorMessage.classList.remove("hidden");
+      }
+      if (messageInput) {
+        messageInput.focus();
+      }
       return;
     }
 
@@ -61,9 +73,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await sendEchoRequest(message);
       console.log("Request successful, updating UI with result", result);
       displayResult(result);
+      if (errorMessage) {
+        errorMessage.textContent = "";
+        errorMessage.classList.add("hidden");
+      }
     } catch (err) {
       console.error("Error in sendEchoRequest:", err);
-      alert("Failed to get echo response. Check console for details.");
+      if (errorMessage) {
+        errorMessage.textContent = "Failed to get echo response. Check console for details.";
+        errorMessage.classList.remove("hidden");
+      }
     } finally {
       if (submitButton) {
         console.log("Re-enabling submit button");
