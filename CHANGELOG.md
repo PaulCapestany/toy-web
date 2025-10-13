@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.24 - 2025-10-13
+
+### fix: point test script at explicit jest config  
+Ensure `npm test` runs successfully by invoking Jest with the project configuration file.
+
 ## v0.1.23 - 2025-10-13
 
 ### fix: focus echo results for assistive tech  

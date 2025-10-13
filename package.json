@@ -1,10 +1,10 @@
 {
     "name": "toy-web",
-    "version": "0.1.23",
+    "version": "0.1.24",
     "description": "Minimalistic frontend reference for toy-service integration",
     "main": "index.html",
     "scripts": {
-        "test": "jest"
+        "test": "jest --config jest.config.js"
     },
     "devDependencies": {
         "jest": "^29.5.0",
