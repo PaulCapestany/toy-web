@@ -153,6 +153,14 @@ function displayResult(result) {
   resultEnv.textContent = result.env || "";
 
   resultDiv.classList.remove("hidden");
+  if (typeof resultDiv.focus === "function") {
+    // Shift focus so assistive tech announces the updated result content.
+    try {
+      resultDiv.focus({ preventScroll: true });
+    } catch (err) {
+      resultDiv.focus();
+    }
+  }
 }
 
 // Export functions for testing

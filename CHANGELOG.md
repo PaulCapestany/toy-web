@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.23 - 2025-10-13
+
+### fix: focus echo results for assistive tech  
+Move keyboard focus to the refreshed result container so screen reader users are notified when new echo data appears.
+
 ## v0.1.20 - 2025-10-09
 
 ### fix: show inline error feedback for echo requests  
