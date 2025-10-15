@@ -13,7 +13,7 @@
 
     <form id="echo-form">
       <label for="messageInput">Message:</label>
-      <input type="text" id="messageInput" name="message" placeholder="Enter your message" required />
+      <input type="text" id="messageInput" name="message" placeholder="Enter your message" aria-describedby="errorMessage" required />
       <button type="submit">Send</button>
     </form>
     <p id="errorMessage" class="error-message hidden" role="alert"></p>

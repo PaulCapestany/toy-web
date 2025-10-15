@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.25 - 2025-10-15
+
+### fix: improve echo form accessibility  
+Ensure the message field advertises error feedback to assistive technology and avoids crashes when the control is missing.
+
 ## v0.1.24 - 2025-10-13
 
 ### fix: point test script at explicit jest config  

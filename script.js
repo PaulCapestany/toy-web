@@ -38,12 +38,16 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Form submitted by user");
 
     const messageInput = document.getElementById("messageInput");
-    const message = messageInput.value.trim();
+    const message = messageInput ? messageInput.value.trim() : "";
     console.log("User input message:", message);
 
     if (errorMessage) {
       errorMessage.textContent = "";
       errorMessage.classList.add("hidden");
+    }
+
+    if (messageInput) {
+      messageInput.setAttribute("aria-invalid", "false");
     }
 
     if (!message) {
@@ -53,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         errorMessage.classList.remove("hidden");
       }
       if (messageInput) {
+        messageInput.setAttribute("aria-invalid", "true");
         messageInput.focus();
       }
       return;
