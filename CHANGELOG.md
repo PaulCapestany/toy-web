@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.26 - 2025-10-16
+
+### fix: surface echo request errors inline  
+Bubble up backend and network error details next to the form so users get actionable feedback without checking the console.
+
 ## v0.1.25 - 2025-10-15
 
 ### fix: improve echo form accessibility  

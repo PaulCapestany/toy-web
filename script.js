@@ -85,7 +85,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (err) {
       console.error("Error in sendEchoRequest:", err);
       if (errorMessage) {
-        errorMessage.textContent = "Failed to get echo response. Check console for details.";
+        const detail =
+          err instanceof Error && err.message ? err.message : "Unknown error. Check console for details.";
+        errorMessage.textContent = `Failed to get echo response: ${detail}`;
         errorMessage.classList.remove("hidden");
       }
     } finally {
