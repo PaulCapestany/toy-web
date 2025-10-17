@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.28 - 2025-10-17
+
+### fix: announce form busy state  
+Let assistive technologies know the form is processing a request so users get feedback while waiting for a response.
+
 ## v0.1.27 - 2025-10-16
 
 ### fix: improve focus outlines for keyboard users  

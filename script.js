@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    form.setAttribute("aria-busy", "true");
     try {
       if (submitButton) {
         console.log("Disabling submit button while request is in flight");
@@ -91,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
         errorMessage.classList.remove("hidden");
       }
     } finally {
+      form.removeAttribute("aria-busy");
       if (submitButton) {
         console.log("Re-enabling submit button");
         submitButton.disabled = false;
