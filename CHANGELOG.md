@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.27 - 2025-10-16
+
+### fix: improve focus outlines for keyboard users  
+Add high-contrast focus rings for buttons so keyboard users can immediately spot their current position.
+
 ## v0.1.26 - 2025-10-16
 
 ### fix: surface echo request errors inline  

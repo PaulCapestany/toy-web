@@ -41,6 +41,15 @@ body {
     background-color: #004799;
   }
   
+  button:focus-visible {
+    outline: 3px solid #facc15;
+    outline-offset: 2px;
+  }
+  
+  button:focus:not(:focus-visible) {
+    outline: none;
+  }
+  
   button:disabled {
     background-color: #7aa8d9;
     cursor: wait;
