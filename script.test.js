@@ -51,4 +51,15 @@ describe("sendEchoRequest", () => {
     fetch.mockRejectedValueOnce(new Error("Network fail"));
     await expect(sendEchoRequest("Hello world")).rejects.toThrow("Network fail");
   });
+
+  test("invalid JSON response throws a descriptive error", async () => {
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => {
+        throw new SyntaxError("Unexpected token < in JSON at position 0");
+      }
+    });
+
+    await expect(sendEchoRequest("Hello world")).rejects.toThrow("Server returned invalid JSON");
+  });
 });

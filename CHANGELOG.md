@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.29 - 2025-10-23
+
+### fix: guard against invalid JSON responses  
+Catch JSON parse failures from the echo API so the UI gets a clearer error message instead of a crash.
+
 ## v0.1.28 - 2025-10-17
 
 ### fix: announce form busy state  

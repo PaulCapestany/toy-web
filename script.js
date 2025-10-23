@@ -129,7 +129,13 @@ async function sendEchoRequest(message) {
     throw new Error(`Server returned status ${response.status}: ${errorText}`);
   }
 
-  const data = await response.json();
+  let data;
+  try {
+    data = await response.json();
+  } catch (err) {
+    console.error("Failed to parse JSON response:", err);
+    throw new Error("Server returned invalid JSON");
+  }
   console.log("Parsed JSON from response:", data);
   return data;
 }
