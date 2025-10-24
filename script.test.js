@@ -32,7 +32,10 @@ describe("sendEchoRequest", () => {
     expect(result).toEqual(mockResponse);
     expect(fetch).toHaveBeenCalledWith("http://localhost:8080/echo", expect.objectContaining({
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
       body: JSON.stringify({ message: "Hello world" })
     }));
   });

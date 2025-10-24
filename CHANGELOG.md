@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.30 - 2025-10-24
+
+### fix: request JSON responses explicitly  
+Send an `Accept: application/json` header with echo requests so the backend knows a JSON payload is expected.
+
 ## v0.1.29 - 2025-10-23
 
 ### fix: guard against invalid JSON responses  

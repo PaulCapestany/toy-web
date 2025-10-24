@@ -1,6 +1,6 @@
 {
     "name": "toy-web",
-    "version": "0.1.29",
+    "version": "0.1.30",
     "description": "Minimalistic frontend reference for toy-service integration",
     "main": "index.html",
     "scripts": {
