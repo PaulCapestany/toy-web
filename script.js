@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (messageInput) {
-      messageInput.setAttribute("aria-invalid", "false");
+      messageInput.removeAttribute("aria-invalid");
     }
 
     if (!message) {

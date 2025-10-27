@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.34 - 2025-10-27
+
+### fix: reset aria-invalid when validation passes  
+Remove the `aria-invalid` attribute once the message field is valid so assistive technology doesn't report stale errors.
+
 ## v0.1.33 - 2025-10-27
 
 ### fix: expose submit button accessibility state  
