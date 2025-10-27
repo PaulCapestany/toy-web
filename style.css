@@ -25,6 +25,13 @@ body {
     border-color: #005cc5;
     outline: 2px solid rgba(0, 92, 197, 0.2);
   }
+
+  input[type="text"]:disabled {
+    background-color: #e5e7eb;
+    border-color: #d1d5db;
+    color: #6b7280;
+    cursor: not-allowed;
+  }
   
   button {
     padding: 6px 16px;

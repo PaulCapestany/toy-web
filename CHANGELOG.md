@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.32 - 2025-10-27
+
+### fix: show disabled input styling  
+Give the echo message field a muted style while disabled so the UI state matches the new request locking logic.
+
 ## v0.1.31 - 2025-10-27
 
 ### fix: lock the message field while requests are running  
