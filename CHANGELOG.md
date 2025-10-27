@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.33 - 2025-10-27
+
+### fix: expose submit button accessibility state  
+Mirror the submit button's disabled state in ARIA attributes so assistive tech recognizes when requests are running.
+
 ## v0.1.32 - 2025-10-27
 
 ### fix: show disabled input styling  

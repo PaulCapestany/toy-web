@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (submitButton) {
         console.log("Disabling submit button while request is in flight");
         submitButton.disabled = true;
+        submitButton.setAttribute("aria-disabled", "true");
         submitButton.textContent = "Sending...";
       }
       const resultContainer = document.getElementById("result");
@@ -108,6 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (submitButton) {
         console.log("Re-enabling submit button");
         submitButton.disabled = false;
+        submitButton.removeAttribute("aria-disabled");
         submitButton.textContent = defaultButtonLabel;
       }
     }
