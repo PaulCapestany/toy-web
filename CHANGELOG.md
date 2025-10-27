@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.31 - 2025-10-27
+
+### fix: lock the message field while requests are running  
+Temporarily disable the echo message input during network calls so users can't submit conflicting edits mid-request.
+
 ## v0.1.30 - 2025-10-24
 
 ### fix: request JSON responses explicitly  

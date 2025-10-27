@@ -38,6 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Form submitted by user");
 
     const messageInput = document.getElementById("messageInput");
+    const shouldTemporarilyDisableInput =
+      messageInput && !messageInput.disabled;
     const message = messageInput ? messageInput.value.trim() : "";
     console.log("User input message:", message);
 
@@ -64,6 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     form.setAttribute("aria-busy", "true");
+    if (shouldTemporarilyDisableInput) {
+      console.log("Disabling message input while request is in flight");
+      messageInput.disabled = true;
+      messageInput.setAttribute("aria-disabled", "true");
+    }
     try {
       if (submitButton) {
         console.log("Disabling submit button while request is in flight");
@@ -93,6 +100,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     } finally {
       form.removeAttribute("aria-busy");
+      if (shouldTemporarilyDisableInput && messageInput) {
+        console.log("Re-enabling message input");
+        messageInput.disabled = false;
+        messageInput.removeAttribute("aria-disabled");
+      }
       if (submitButton) {
         console.log("Re-enabling submit button");
         submitButton.disabled = false;
