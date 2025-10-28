@@ -87,6 +87,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await sendEchoRequest(message);
       console.log("Request successful, updating UI with result", result);
       displayResult(result);
+      if (messageInput) {
+        console.log("Clearing message input after successful submission");
+        messageInput.value = "";
+      }
       if (errorMessage) {
         errorMessage.textContent = "";
         errorMessage.classList.add("hidden");

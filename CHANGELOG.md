@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.36 - 2025-10-27
+
+### fix: reset message field after successful requests  
+Clear the echo message input once a response arrives so users start from a fresh state.
+
 ## v0.1.35 - 2025-10-27
 
 ### docs: recommend npx serve for local testing  
