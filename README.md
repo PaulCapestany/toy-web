@@ -54,6 +54,11 @@ Install dependencies once with `npm install` to ensure tooling like Jest is avai
    ```
    This starts a static server, serving `toy-web` files at http://localhost:8081.
 
+   Prefer [npx serve](https://www.npmjs.com/package/serve) if you already have Node.js installed—it keeps the terminal output tidy and supports automatic reloads:
+   ```bash
+   npx serve --listen 8081
+   ```
+
 3. **Open the frontend in your browser:**  
    Go to http://localhost:8081 in your browser. You should see the main `toy-web` page. From there, you can interact with the `/echo` endpoint (and other endpoints like `/info` or `/healthz`) through the frontend interface.
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.35 - 2025-10-27
+
+### docs: recommend npx serve for local testing  
+Document an alternative static server command that offers cleaner logging while serving the app locally.
+
 ## v0.1.34 - 2025-10-27
 
 ### fix: reset aria-invalid when validation passes  
