@@ -22,6 +22,9 @@
 
 console.log("script.js loaded");
 
+// Default timeout so fetch requests don't hang indefinitely.
+const REQUEST_TIMEOUT_MS = 10000;
+
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM fully loaded, attaching event listeners");
   const form = document.getElementById("echo-form");
@@ -125,20 +128,41 @@ document.addEventListener("DOMContentLoaded", () => {
  * @param {string} message The message to send
  * @returns {Promise<object>} The response object {message, version, commit, env}
  */
-async function sendEchoRequest(message) {
+async function sendEchoRequest(message, { timeoutMs = REQUEST_TIMEOUT_MS } = {}) {
   console.log("Inside sendEchoRequest function");
   const url = "http://localhost:8080/echo";
   const payload = { message };
 
   console.log("Fetch POST:", url, payload);
-  const response = await fetch(url, {
+  const controller =
+    typeof AbortController !== "undefined" ? new AbortController() : null;
+  const timeoutId = controller
+    ? setTimeout(() => controller.abort(), timeoutMs)
+    : null;
+  const requestOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json"
     },
     body: JSON.stringify(payload)
-  });
+  };
+  if (controller) {
+    requestOptions.signal = controller.signal;
+  }
+  let response;
+  try {
+    response = await fetch(url, requestOptions);
+  } catch (err) {
+    if (controller && err && err.name === "AbortError") {
+      throw new Error(`Request timed out after ${timeoutMs / 1000} seconds`);
+    }
+    throw err;
+  } finally {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+  }
 
   console.log("Fetch response received. Status:", response.status);
 

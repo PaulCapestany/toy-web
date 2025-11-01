@@ -25,6 +25,7 @@ describe("sendEchoRequest", () => {
 
     fetch.mockResolvedValueOnce({
       ok: true,
+      status: 200,
       json: async () => mockResponse
     });
 
@@ -38,6 +39,8 @@ describe("sendEchoRequest", () => {
       },
       body: JSON.stringify({ message: "Hello world" })
     }));
+    const requestOptions = fetch.mock.calls[0][1];
+    expect(requestOptions.signal).toBeDefined();
   });
 
   test("non-200 response throws an error", async () => {
@@ -55,9 +58,17 @@ describe("sendEchoRequest", () => {
     await expect(sendEchoRequest("Hello world")).rejects.toThrow("Network fail");
   });
 
+  test("timeout aborts long-running requests", async () => {
+    const abortError = new Error("The operation was aborted");
+    abortError.name = "AbortError";
+    fetch.mockRejectedValueOnce(abortError);
+    await expect(sendEchoRequest("Hello world")).rejects.toThrow("Request timed out after 10 seconds");
+  });
+
   test("invalid JSON response throws a descriptive error", async () => {
     fetch.mockResolvedValueOnce({
       ok: true,
+      status: 200,
       json: async () => {
         throw new SyntaxError("Unexpected token < in JSON at position 0");
       }

@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.37 - 2025-10-27
+
+### fix: timeout stalled echo requests  
+Abort frontend fetches after 10 seconds so users get prompt feedback when the backend stops responding.
+
 ## v0.1.36 - 2025-10-27
 
 ### fix: reset message field after successful requests  
