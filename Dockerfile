@@ -12,7 +12,8 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 # Copy npm manifests; package-lock.json is optional in this repo
 COPY package*.json ./
-RUN npm install --loglevel verbose
+# Prefer deterministic installs when a lockfile is present, fall back otherwise.
+RUN if [ -f package-lock.json ]; then npm ci --loglevel verbose; else npm install --loglevel verbose; fi
 COPY . .
 # Run tests and build steps if any
 RUN npm test

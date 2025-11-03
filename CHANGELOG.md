@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.38 - 2025-10-27
+
+### fix: prefer npm ci when building images  
+Use the package lock during Docker builds to keep dependency installs deterministic while retaining a fallback when the lockfile is missing.
+
 ## v0.1.37 - 2025-10-27
 
 ### fix: timeout stalled echo requests  
