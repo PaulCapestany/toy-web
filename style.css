@@ -9,6 +9,40 @@ body {
   .hidden {
     display: none;
   }
+
+  #echo-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  #echo-form label {
+    display: block;
+    font-weight: 600;
+    margin-right: 0;
+  }
+
+  #echo-form input[type="text"] {
+    flex: 1 1 240px;
+    min-width: 0;
+  }
+
+  #echo-form button {
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 520px) {
+    #echo-form {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    #echo-form input[type="text"],
+    #echo-form button {
+      width: 100%;
+    }
+  }
   
   label {
     margin-right: 10px;

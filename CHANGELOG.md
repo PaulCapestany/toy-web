@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.39 - 2025-11-19
+
+### fix: keep the echo form responsive on narrow screens  
+Layout tweaks give the message field and send button full width on phones so the form stays readable and usable without horizontal scrolling.
+
 ## v0.1.38 - 2025-10-27
 
 ### fix: prefer npm ci when building images  
