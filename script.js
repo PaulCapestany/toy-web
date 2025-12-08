@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.querySelector("button[type='submit']") || form.querySelector("button");
   const defaultButtonLabel = submitButton ? submitButton.textContent : "";
   const errorMessage = document.getElementById("errorMessage");
+  const statusMessage = document.getElementById("statusMessage");
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     console.log("Form submitted by user");
@@ -49,6 +50,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (errorMessage) {
       errorMessage.textContent = "";
       errorMessage.classList.add("hidden");
+    }
+    if (statusMessage) {
+      statusMessage.textContent = "";
+      statusMessage.classList.add("hidden");
     }
 
     if (messageInput) {
@@ -74,6 +79,10 @@ document.addEventListener("DOMContentLoaded", () => {
       messageInput.disabled = true;
       messageInput.setAttribute("aria-disabled", "true");
     }
+    if (statusMessage) {
+      statusMessage.textContent = "Sending message...";
+      statusMessage.classList.remove("hidden");
+    }
     try {
       if (submitButton) {
         console.log("Disabling submit button while request is in flight");
@@ -94,6 +103,10 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Clearing message input after successful submission");
         messageInput.value = "";
       }
+      if (statusMessage) {
+        statusMessage.textContent = "Echo response received.";
+        statusMessage.classList.remove("hidden");
+      }
       if (errorMessage) {
         errorMessage.textContent = "";
         errorMessage.classList.add("hidden");
@@ -105,6 +118,10 @@ document.addEventListener("DOMContentLoaded", () => {
           err instanceof Error && err.message ? err.message : "Unknown error. Check console for details.";
         errorMessage.textContent = `Failed to get echo response: ${detail}`;
         errorMessage.classList.remove("hidden");
+      }
+      if (statusMessage) {
+        statusMessage.textContent = "Request failed. Please try again.";
+        statusMessage.classList.remove("hidden");
       }
     } finally {
       form.removeAttribute("aria-busy");

@@ -110,6 +110,12 @@ body {
     color: #b3261e;
   }
   
+  .status-message {
+    margin-top: 8px;
+    color: #065f46;
+    font-weight: 600;
+  }
+  
   #result.hidden {
     display: none;
   }

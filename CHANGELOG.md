@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.40 - 2025-12-08
+
+### fix: surface request status updates inline  
+Show a live status message while echo requests are running and update it after success or failure so users get immediate feedback without checking the console.
+
 ## v0.1.39 - 2025-11-19
 
 ### fix: keep the echo form responsive on narrow screens  
