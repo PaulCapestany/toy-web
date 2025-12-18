@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.41 - 2025-12-18
+
+### feat: add quick reset for the echo form
+Add a clear control and autofocus so users can wipe stale data and start typing immediately without refreshing the page.
+
 ## v0.1.40 - 2025-12-08
 
 ### fix: surface request status updates inline  

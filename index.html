@@ -13,8 +13,9 @@
 
     <form id="echo-form">
       <label for="messageInput">Message:</label>
-      <input type="text" id="messageInput" name="message" placeholder="Enter your message" aria-describedby="errorMessage" required />
+      <input type="text" id="messageInput" name="message" placeholder="Enter your message" aria-describedby="errorMessage" required autofocus />
       <button type="submit">Send</button>
+      <button type="button" id="clearButton" class="button-secondary">Clear</button>
     </form>
     <p id="statusMessage" class="status-message hidden" role="status" aria-live="polite"></p>
     <p id="errorMessage" class="error-message hidden" role="alert" aria-live="assertive"></p>

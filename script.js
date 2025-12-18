@@ -32,16 +32,51 @@ document.addEventListener("DOMContentLoaded", () => {
     console.warn("echo-form not found in DOM, skipping listener registration");
     return;
   }
+  const messageInput = document.getElementById("messageInput");
   const submitButton =
     form.querySelector("button[type='submit']") || form.querySelector("button");
+  const clearButton = document.getElementById("clearButton");
   const defaultButtonLabel = submitButton ? submitButton.textContent : "";
   const errorMessage = document.getElementById("errorMessage");
   const statusMessage = document.getElementById("statusMessage");
+  const resultContainer = document.getElementById("result");
+
+  if (messageInput && typeof messageInput.focus === "function") {
+    try {
+      messageInput.focus({ preventScroll: true });
+    } catch (err) {
+      messageInput.focus();
+    }
+  }
+
+  if (clearButton) {
+    clearButton.addEventListener("click", () => {
+      console.log("Clearing message input and feedback");
+      if (messageInput) {
+        messageInput.value = "";
+        messageInput.removeAttribute("aria-invalid");
+        messageInput.disabled = false;
+        messageInput.removeAttribute("aria-disabled");
+        messageInput.focus();
+      }
+      if (errorMessage) {
+        errorMessage.textContent = "";
+        errorMessage.classList.add("hidden");
+      }
+      if (statusMessage) {
+        statusMessage.textContent = "";
+        statusMessage.classList.add("hidden");
+      }
+      if (resultContainer) {
+        resultContainer.classList.add("hidden");
+      }
+    });
+  }
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     console.log("Form submitted by user");
 
-    const messageInput = document.getElementById("messageInput");
     const shouldTemporarilyDisableInput =
       messageInput && !messageInput.disabled;
     const message = messageInput ? messageInput.value.trim() : "";
@@ -90,7 +125,9 @@ document.addEventListener("DOMContentLoaded", () => {
         submitButton.setAttribute("aria-disabled", "true");
         submitButton.textContent = "Sending...";
       }
-      const resultContainer = document.getElementById("result");
+      if (clearButton) {
+        clearButton.disabled = true;
+      }
       if (resultContainer) {
         console.log("Hiding previous result while fetching new data");
         resultContainer.classList.add("hidden");
@@ -135,6 +172,9 @@ document.addEventListener("DOMContentLoaded", () => {
         submitButton.disabled = false;
         submitButton.removeAttribute("aria-disabled");
         submitButton.textContent = defaultButtonLabel;
+      }
+      if (clearButton) {
+        clearButton.disabled = false;
       }
     }
   });

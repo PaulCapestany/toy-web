@@ -96,6 +96,25 @@ body {
     cursor: wait;
     opacity: 0.75;
   }
+
+  .button-secondary {
+    background-color: #e5e7eb;
+    color: #111827;
+    border: 1px solid #d1d5db;
+  }
+
+  .button-secondary:hover,
+  .button-secondary:focus {
+    background-color: #d1d5db;
+  }
+
+  .button-secondary:disabled {
+    background-color: #e5e7eb;
+    color: #9ca3af;
+    border-color: #e5e7eb;
+    cursor: not-allowed;
+    opacity: 0.9;
+  }
   
   code {
     display: inline-block;
