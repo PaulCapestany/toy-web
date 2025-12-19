@@ -11,6 +11,17 @@
     <h1>toy-web: Echo Test</h1>
     <p>Use the form below to send a message to the toy-service <code>/echo</code> endpoint.</p>
 
+    <section class="health-card" aria-label="toy-service health">
+      <div class="health-header">
+        <h2>toy-service status</h2>
+        <button type="button" id="healthRetryButton" class="button-secondary button-compact">Retry check</button>
+      </div>
+      <p id="healthStatus" class="health-indicator is-checking" role="status" aria-live="polite">
+        <span class="health-dot" aria-hidden="true"></span>
+        <span id="healthStatusText">Checking service health...</span>
+      </p>
+    </section>
+
     <form id="echo-form">
       <label for="messageInput">Message:</label>
       <input type="text" id="messageInput" name="message" placeholder="Enter your message" aria-describedby="errorMessage" required autofocus />

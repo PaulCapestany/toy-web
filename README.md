@@ -18,6 +18,9 @@ Welcome to **`toy-web`**, a minimalistic frontend reference project that works a
 - **Interactive Examples:**  
   A simple form to test `/echo`, a status bar for `/healthz`, and a section to display `/info` data.
 
+- **Health Signal:**  
+  Inline status indicator pings `/healthz` so you know the backend is reachable before sending requests.
+
 - **Onboarding & Learning:**  
   Ideal for frontend-focused contributors who want to understand how their work fits into a larger system without dealing with containers or complex CI/CD.
 

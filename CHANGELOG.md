@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.42 - 2025-12-19
+
+### fix: surface backend health status
+Add a /healthz indicator with a retry control so users know whether toy-service is reachable before sending echo requests. Includes coverage for the new health fetch helper.
+
 ## v0.1.41 - 2025-12-18
 
 ### feat: add quick reset for the echo form

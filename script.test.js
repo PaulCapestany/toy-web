@@ -5,7 +5,7 @@
  * We mock global fetch to simulate API responses.
  */
 
-const { sendEchoRequest } = require("./script.js");
+const { sendEchoRequest, fetchHealthStatus } = require("./script.js");
 
 // Mock the fetch function
 global.fetch = jest.fn();
@@ -75,5 +75,56 @@ describe("sendEchoRequest", () => {
     });
 
     await expect(sendEchoRequest("Hello world")).rejects.toThrow("Server returned invalid JSON");
+  });
+});
+
+describe("fetchHealthStatus", () => {
+  beforeEach(() => {
+    fetch.mockReset();
+  });
+
+  test("returns the status string from a healthy service", async () => {
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: async () => ({ status: "ok" })
+    });
+
+    const status = await fetchHealthStatus();
+    expect(status).toBe("ok");
+    expect(fetch).toHaveBeenCalledWith("http://localhost:8080/healthz", expect.objectContaining({
+      method: "GET",
+      headers: { Accept: "application/json" }
+    }));
+    const requestOptions = fetch.mock.calls[0][1];
+    expect(requestOptions.signal).toBeDefined();
+  });
+
+  test("non-200 response throws an error", async () => {
+    fetch.mockResolvedValueOnce({
+      ok: false,
+      status: 503,
+      text: async () => "Service unavailable"
+    });
+
+    await expect(fetchHealthStatus()).rejects.toThrow("Health check failed with status 503: Service unavailable");
+  });
+
+  test("timeout aborts health checks", async () => {
+    const abortError = new Error("The operation was aborted");
+    abortError.name = "AbortError";
+    fetch.mockRejectedValueOnce(abortError);
+
+    await expect(fetchHealthStatus({ timeoutMs: 1000 })).rejects.toThrow("Health check timed out after 1 seconds");
+  });
+
+  test("missing status field is rejected", async () => {
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: async () => ({ message: "ok" })
+    });
+
+    await expect(fetchHealthStatus()).rejects.toThrow("Health check response missing status");
   });
 });

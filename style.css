@@ -6,6 +6,79 @@ body {
     padding: 0 16px;
   }
 
+  .health-card {
+    margin: 16px 0 20px;
+    padding: 12px 14px;
+    border: 1px solid #e5e7eb;
+    background-color: #f8fafc;
+    border-radius: 8px;
+  }
+
+  .health-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .health-header h2 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  .health-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-weight: 600;
+  }
+
+  .health-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #9ca3af;
+    box-shadow: 0 0 0 4px rgba(156, 163, 175, 0.15);
+  }
+
+  .health-indicator.is-checking {
+    background-color: #fffbeb;
+    border-color: #fcd34d;
+    color: #92400e;
+  }
+
+  .health-indicator.is-checking .health-dot {
+    background-color: #fbbf24;
+    box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.2);
+  }
+
+  .health-indicator.is-up {
+    background-color: #ecfdf3;
+    border-color: #a7f3d0;
+    color: #065f46;
+  }
+
+  .health-indicator.is-up .health-dot {
+    background-color: #10b981;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+  }
+
+  .health-indicator.is-down {
+    background-color: #fef2f2;
+    border-color: #fecdd3;
+    color: #991b1b;
+  }
+
+  .health-indicator.is-down .health-dot {
+    background-color: #ef4444;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+  }
+
   .hidden {
     display: none;
   }
@@ -101,6 +174,10 @@ body {
     background-color: #e5e7eb;
     color: #111827;
     border: 1px solid #d1d5db;
+  }
+
+  .button-compact {
+    padding: 6px 10px;
   }
 
   .button-secondary:hover,

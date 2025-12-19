@@ -24,6 +24,7 @@ console.log("script.js loaded");
 
 // Default timeout so fetch requests don't hang indefinitely.
 const REQUEST_TIMEOUT_MS = 10000;
+const HEALTH_CHECK_TIMEOUT_MS = 5000;
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM fully loaded, attaching event listeners");
@@ -40,6 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const errorMessage = document.getElementById("errorMessage");
   const statusMessage = document.getElementById("statusMessage");
   const resultContainer = document.getElementById("result");
+  const healthStatus = document.getElementById("healthStatus");
+  const healthStatusText = document.getElementById("healthStatusText");
+  const healthRetryButton = document.getElementById("healthRetryButton");
 
   if (messageInput && typeof messageInput.focus === "function") {
     try {
@@ -71,6 +75,45 @@ document.addEventListener("DOMContentLoaded", () => {
         resultContainer.classList.add("hidden");
       }
     });
+  }
+
+  if (healthStatus && healthStatusText) {
+    const setHealthState = (state, message) => {
+      healthStatus.classList.remove("is-checking", "is-up", "is-down");
+      healthStatus.classList.add(state);
+      healthStatusText.textContent = message;
+    };
+
+    const runHealthCheck = async () => {
+      console.log("Checking toy-service health");
+      setHealthState("is-checking", "Checking service health...");
+      if (healthRetryButton) {
+        healthRetryButton.disabled = true;
+        healthRetryButton.setAttribute("aria-disabled", "true");
+      }
+      try {
+        const status = await fetchHealthStatus({ timeoutMs: HEALTH_CHECK_TIMEOUT_MS });
+        const isHealthy = typeof status === "string" && status.toLowerCase() === "ok";
+        if (isHealthy) {
+          setHealthState("is-up", "toy-service is healthy.");
+        } else {
+          setHealthState("is-down", "toy-service responded but is not OK.");
+        }
+      } catch (err) {
+        console.error("Health check failed:", err);
+        setHealthState("is-down", "Unable to reach toy-service. Start it locally and retry.");
+      } finally {
+        if (healthRetryButton) {
+          healthRetryButton.disabled = false;
+          healthRetryButton.removeAttribute("aria-disabled");
+        }
+      }
+    };
+
+    runHealthCheck();
+    if (healthRetryButton) {
+      healthRetryButton.addEventListener("click", runHealthCheck);
+    }
   }
 
   form.addEventListener("submit", async (e) => {
@@ -241,6 +284,64 @@ async function sendEchoRequest(message, { timeoutMs = REQUEST_TIMEOUT_MS } = {})
 }
 
 /**
+ * fetchHealthStatus checks the /healthz endpoint and returns its status string.
+ * @param {object} options
+ * @param {number} options.timeoutMs Maximum time to wait before aborting
+ * @returns {Promise<string>} The status field from the response
+ */
+async function fetchHealthStatus({ timeoutMs = HEALTH_CHECK_TIMEOUT_MS } = {}) {
+  console.log("Fetching toy-service health status");
+  const url = "http://localhost:8080/healthz";
+  const controller =
+    typeof AbortController !== "undefined" ? new AbortController() : null;
+  const timeoutId = controller
+    ? setTimeout(() => controller.abort(), timeoutMs)
+    : null;
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Accept: "application/json"
+    }
+  };
+  if (controller) {
+    requestOptions.signal = controller.signal;
+  }
+
+  let response;
+  try {
+    response = await fetch(url, requestOptions);
+  } catch (err) {
+    if (controller && err && err.name === "AbortError") {
+      throw new Error(`Health check timed out after ${Math.round(timeoutMs / 1000)} seconds`);
+    }
+    throw err;
+  } finally {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+  }
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("Non-OK healthz response:", errorText);
+    throw new Error(`Health check failed with status ${response.status}: ${errorText}`);
+  }
+
+  let data;
+  try {
+    data = await response.json();
+  } catch (err) {
+    console.error("Failed to parse health JSON response:", err);
+    throw new Error("Health check returned invalid JSON");
+  }
+  if (!data || typeof data.status !== "string") {
+    throw new Error("Health check response missing status");
+  }
+  console.log("Health status:", data.status);
+  return data.status;
+}
+
+/**
  * displayResult updates the DOM with the echo result fields.
  * @param {object} result The result object with {message, version, commit, env}.
  */
@@ -281,6 +382,7 @@ function displayResult(result) {
 // Export functions for testing
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
-    sendEchoRequest
+    sendEchoRequest,
+    fetchHealthStatus
   };
 }

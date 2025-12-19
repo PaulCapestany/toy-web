@@ -20,9 +20,6 @@ This document outlines planned enhancements and maintenance tasks for `toy-web`.
 - **feat: create a simple HTML page with a form to test /echo**  
   A text input and a "Send" button to POST a message to `/echo`, and display the modified message and metadata in a results section.
 
-- **feat: add a status bar to show /healthz result**  
-  On page load, fetch `/healthz` and show "Service is OK" or "Service is Down".
-
 - **feat: implement a simple "Service Info" section**  
   Add a button or a section that fetches `/info` and displays the environment, version, commit info, etc.
 
