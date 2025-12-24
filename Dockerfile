@@ -29,6 +29,9 @@ RUN rm /usr/share/nginx/html/*.orig 2>/dev/null || true
 
 # Expose port 8080 for consistency
 EXPOSE 8080
+# Basic healthcheck to ensure Nginx is serving the site
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD wget -qO- http://localhost:8080/ > /dev/null || exit 1
 
 # Adjust Nginx to listen on 8080 in the default server
 RUN sed -i 's/listen\s*80;/listen 8080;/' /etc/nginx/conf.d/default.conf
